@@ -46,16 +46,8 @@
 			   }
 			   return true;
 		}
-	    $(document).ready(function(){
-			$("button").click(function(){
-			   var t = Number($('#temp').val());//celsius
-			   var u = $('#unit').val();
-			   
-				if(!validateTemperature(t)){
-					return;
-				}
-			   
-			   var t1;
+		function convertTemperature(t, u){
+						   var t1;
 			   var u1;
 			   
 			   if(u == "F"){
@@ -68,8 +60,22 @@
 					t1 = t * (4/5);
                     u1 = "Réaumur";
 			   }
+			   return {
+				value: t1,
+				unit: u1
+			   };
+		}
+	    $(document).ready(function(){
+			$("button").click(function(){
+			   var t = Number($('#temp').val());//celsius
+			   var u = $('#unit').val();
 			   
-			   alert("Temperature is "+t1+" in "+u1);
+				if(!validateTemperature(t)){
+					return;
+				}
+			   
+				var result = convertTemperature(t, u);
+			   alert("Temperature is "+result.value+" in "+ result.unit);
 			});
 		});
 	</script>
